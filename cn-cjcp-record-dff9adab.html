@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据查询与知识对照 · 彩经网</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f6f4ef;
+            font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+            color: #2e2a24;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+        }
+
+        .page {
+            max-width: 1024px;
+            margin: 0 auto;
+            background: #fefcf8;
+            border-radius: 28px;
+            padding: 2.5rem 2rem 3rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 12px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        h1 {
+            font-weight: 450;
+            font-size: 2rem;
+            letter-spacing: 0.02em;
+            border-left: 6px solid #b0987a;
+            padding-left: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #2a241e;
+        }
+
+        .subhead {
+            font-size: 0.95rem;
+            color: #6b5f4e;
+            margin-bottom: 2.2rem;
+            padding-left: 1.8rem;
+            border-bottom: 1px solid #e3ddd0;
+            padding-bottom: 1rem;
+        }
+
+        .intro-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem 2.5rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .intro-grid .main-desc {
+            flex: 2;
+            min-width: 240px;
+        }
+
+        .intro-grid .side-summary {
+            flex: 1.2;
+            min-width: 200px;
+            background: #f2ede4;
+            padding: 1.4rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        .intro-grid .main-desc p {
+            margin-bottom: 1.2rem;
+        }
+
+        .intro-grid .main-desc a {
+            color: #826b50;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #b0987a;
+        }
+
+        .intro-grid .main-desc a:hover {
+            border-bottom: 2px solid #826b50;
+        }
+
+        .side-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-summary li {
+            padding: 0.45rem 0;
+            border-bottom: 1px dashed #d6cebe;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .side-summary li:last-child {
+            border-bottom: none;
+        }
+
+        .side-summary li::before {
+            content: "▹";
+            color: #b0987a;
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 2.8rem 0 2.5rem;
+        }
+
+        .card-item {
+            background: #faf8f4;
+            border-radius: 18px;
+            padding: 1.4rem 1.2rem 1.2rem;
+            border: 1px solid #e7dfd3;
+            transition: box-shadow 0.15s;
+        }
+
+        .card-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .card-item h3 {
+            font-size: 1rem;
+            font-weight: 550;
+            margin-bottom: 0.5rem;
+            color: #3d352b;
+            letter-spacing: 0.01em;
+        }
+
+        .card-item p {
+            font-size: 0.9rem;
+            color: #5a4f3f;
+        }
+
+        .callout-block {
+            background: #f3efe7;
+            border-left: 5px solid #b0987a;
+            padding: 1.2rem 1.6rem;
+            border-radius: 16px;
+            margin: 2.2rem 0 2rem;
+            font-size: 0.95rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.3rem 0.6rem;
+        }
+
+        .callout-block .callout-label {
+            font-weight: 550;
+            color: #4c4034;
+            background: #ddd5c8;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .callout-block a {
+            color: #6d5a44;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #cbb99f;
+            font-weight: 500;
+        }
+
+        .faq-mini {
+            margin: 2.2rem 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .faq-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem 1rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #ece6db;
+        }
+
+        .faq-q {
+            font-weight: 550;
+            color: #3d352b;
+            min-width: 80px;
+        }
+
+        .faq-a {
+            color: #5c5142;
+            flex: 1;
+        }
+
+        .faq-a a {
+            color: #7a654d;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: #d4c5b0;
+        }
+
+        .related-links {
+            margin-top: 2.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e3ddd0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.8rem;
+            font-size: 0.9rem;
+        }
+
+        .related-links span {
+            color: #7a6b59;
+        }
+
+        .related-links a {
+            color: #6d5a44;
+            text-decoration: none;
+            border-bottom: 1px dotted #cbb99f;
+        }
+
+        .related-links a:hover {
+            border-bottom: 2px solid #826b50;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.8rem; }
+            .page { padding: 1.8rem 1rem; }
+            h1 { font-size: 1.6rem; padding-left: 0.8rem; }
+            .subhead { padding-left: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <h1>数据索引 · 对照参考</h1>
+        <div class="subhead">日常查询 · 延伸阅读 · 条目速览</div>
+
+        <div class="intro-grid">
+            <div class="main-desc">
+                <p>无论是核对近期条目、横向比较数值，还是回溯历史趋势，一份结构清晰的资料库能让日常操作更高效。<a href="https://cn-cjcp.com">彩经网</a> 提供分类数据集合，覆盖常用统计、走势记录及基础对照表，适合需要频繁查阅与比对的场景。页面以列表、表格与索引卡片形式组织，减少跳转层级，提升定位速度。</p>
+                <p>平台内容聚焦于可验证的公开数据与通用知识整理，不包含主观预测或承诺性描述。用户可将其作为参考资料的一部分，结合自身判断进行延伸使用。</p>
+            </div>
+            <div class="side-summary">
+                <ul>
+                    <li>常用对照表与频次统计</li>
+                    <li>历史走势与分段汇总</li>
+                    <li>分类条目快速筛选</li>
+                    <li>基础术语与说明文档</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="feature-cards">
+            <div class="card-item">
+                <h3>分类列表</h3>
+                <p>按类型与属性划分条目，支持多维度筛选。适合批量对比与归纳。</p>
+            </div>
+            <div class="card-item">
+                <h3>走势图示</h3>
+                <p>数值波动与分布概览，基于历史数据整理，辅助趋势观察。</p>
+            </div>
+            <div class="card-item">
+                <h3>速查手册</h3>
+                <p>常见数值对照、区间划分及转换说明，减少重复计算。</p>
+            </div>
+            <div class="card-item">
+                <h3>延伸条目</h3>
+                <p>关联知识点与补充阅读，帮助理解数据产生的背景与方法。</p>
+            </div>
+        </div>
+
+        <div class="callout-block">
+            <span class="callout-label">使用提示</span>
+            <span>数据内容仅供参考，核对时请以权威发布为准。如需深度分析，可结合 <a href="https://cn-cjcp.com">彩经网</a> 提供的多期统计与分段整理，自行构建对照框架。</span>
+        </div>
+
+        <div class="faq-mini">
+            <div class="faq-row">
+                <span class="faq-q">数据来源？</span>
+                <span class="faq-a">平台内容基于公开渠道整理，定期复核与更新，保持与原始信息一致。</span>
+            </div>
+            <div class="faq-row">
+                <span class="faq-q">如何快速定位？</span>
+                <span class="faq-a">使用分类标签与索引目录，也可直接搜索关键词。详细说明见 <a href="https://cn-cjcp.com">彩经网</a> 帮助页面。</span>
+            </div>
+            <div class="faq-row">
+                <span class="faq-q">是否支持导出？</span>
+                <span class="faq-a">部分表格与列表提供复制或下载功能，便于本地整理与二次分析。</span>
+            </div>
+        </div>
+
+        <div class="related-links">
+            <span>相关信息：</span>
+            <a href="#">统计概览</a>
+            <a href="#">术语对照</a>
+            <a href="#">更新日志</a>
+            <span>· 更多资料访问 <a href="https://cn-cjcp.com">彩经网</a></span>
+        </div>
+
+        <!-- 页面底部留白 使用非显示隐性占位 -->
+        <div style="height: 0.5rem;"></div>
+    </div>
+</body>
+</html>
