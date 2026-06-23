@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>炸金花 · 牌局故事与稳定入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f4f1ed;
+            color: #2c2a28;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+        }
+
+        /* 深色头图 —— 沉稳牌桌基调 */
+        .hero {
+            background: linear-gradient(145deg, #1e1b18 0%, #2b2622 100%);
+            color: #eae5da;
+            padding: 3.2rem 1.5rem 2.8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "♠ ♦ ♣ ♥";
+            position: absolute;
+            top: -20px;
+            left: -10%;
+            font-size: 7rem;
+            opacity: 0.04;
+            white-space: nowrap;
+            letter-spacing: 2rem;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #b8ad9a;
+            max-width: 680px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .hero .sub strong {
+            color: #d8cbae;
+            font-weight: 400;
+        }
+
+        /* 浅色正文区 —— 留白与呼吸 */
+        .content {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.8rem 1.8rem 3.5rem;
+        }
+
+        .story-block {
+            margin-bottom: 2.6rem;
+        }
+
+        .story-block p {
+            margin-bottom: 1.4rem;
+            font-size: 1.06rem;
+        }
+
+        .story-block p:first-of-type {
+            font-size: 1.12rem;
+            border-left: 4px solid #9b7e5c;
+            padding-left: 1.2rem;
+            color: #3e3a35;
+        }
+
+        /* 特点列表 —— 沉稳卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem 1.3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s, transform 0.15s;
+            border: 1px solid #e7e2da;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+
+        .feature-card .icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #2c2824;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #5b554d;
+            line-height: 1.5;
+        }
+
+        /* 场景段落 + 提示 */
+        .scene-note {
+            background: #f0ebe3;
+            border-radius: 24px;
+            padding: 1.6rem 2rem;
+            margin: 1.8rem 0 2.2rem;
+            border-left: 6px solid #9b7e5c;
+        }
+
+        .scene-note h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #2f2a24;
+        }
+
+        .scene-note p {
+            margin-bottom: 0.5rem;
+            color: #3d3832;
+        }
+
+        /* FAQ 摘要 —— 极简折叠感 */
+        .faq-mini {
+            margin: 2.5rem 0 1.8rem;
+        }
+
+        .faq-mini details {
+            border-bottom: 1px solid #dbd4ca;
+            padding: 0.9rem 0;
+            cursor: pointer;
+        }
+
+        .faq-mini details:first-of-type {
+            border-top: 1px solid #dbd4ca;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: #362f28;
+            outline: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-mini summary::after {
+            content: "+";
+            font-size: 1.3rem;
+            color: #9b7e5c;
+            transition: transform 0.2s;
+        }
+
+        .faq-mini details[open] summary::after {
+            content: "−";
+        }
+
+        .faq-mini .answer {
+            padding: 0.8rem 1rem 0.2rem;
+            color: #4f4942;
+            font-size: 0.98rem;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #9b6f44;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #7a532e;
+            border-bottom-color: #9b6f44;
+        }
+
+        /* 温和结尾 */
+        .gentle-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd7cd;
+            font-size: 0.95rem;
+            color: #6f675e;
+            text-align: center;
+        }
+
+        .gentle-footer p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .sub {
+                font-size: 1rem;
+            }
+            .content {
+                padding: 2rem 1.2rem 2.8rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .scene-note {
+                padding: 1.2rem 1.4rem;
+            }
+            .faq-mini summary {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .hero {
+                padding: 4.5rem 2rem 3.5rem;
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .feature-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>牌局如故事 · 稳定如锚点</h1>
+        <p class="sub">
+            <strong>炸金花</strong>，一场三张牌的博弈，数十年桌面沉淀。<br>
+            从熟人牌局到线上相遇，始终需要一处可信的入口。
+        </p>
+    </header>
+
+    <main class="content">
+
+        <div class="story-block">
+            <p>在纸牌游戏的世界里，<a href="https://home-goldenflower.com">炸金花游戏</a>始终占有一席特别的位置。它不依赖复杂的规则，却充满了观察、判断与心理节奏的张力。每一局都是新的排列组合，每一次下注都是对概率的直觉反馈。</p>
+
+            <p>很多人第一次接触炸金花是在家庭聚会或朋友闲聚时。一张桌子、一副扑克、三两熟人，氛围轻松却暗藏机锋。后来，这种场景逐渐迁移到了线上，但核心诉求从未改变：需要一个稳定、干净、直接进入的页面入口，不必在广告或浮层中反复寻找。</p>
+
+            <p>正因如此，一个清晰且长期有效的入口，反而成为体验中最容易被忽略却最关键的一环。</p>
+        </div>
+
+        <!-- 特点列表：偏知识型 -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="icon">🃏</span>
+                <h3>三张牌哲学</h3>
+                <p>每位玩家仅握三张手牌，按豹子、同花顺、金花、顺子、对子等规则比大小。简单中藏着无尽变化。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🧠</span>
+                <h3>心理博弈</h3>
+                <p>炸金花不仅是概率游戏，更是表情、节奏与诈唬的舞台。懂得何时弃牌、何时加注，往往比好牌更重要。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">📐</span>
+                <h3>快速上手</h3>
+                <p>从认识牌型到完成第一局，通常只需要几分钟。对新手友好，但深度足以让老手持续琢磨。</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🔗</span>
+                <h3>稳定入口</h3>
+                <p>无论何时想重温牌局节奏，一个直达的链接可以让过程更顺滑。少跳转，多专注。<br><a href="https://home-goldenflower.com">炸金花游戏</a>页面就在那里。</p>
+            </div>
+        </div>
+
+        <!-- 场景段落 -->
+        <div class="scene-note">
+            <h4>⏳ 常见使用场景</h4>
+            <p>午后闲暇，想快速来几局放松情绪；或者朋友线上小聚，需要一个共同熟悉的玩法。不需要大包下载，不需要注册表单，只需打开页面，规则与节奏即刻就位。</p>
+            <p>这也是为什么我们反复强调 <strong>入口的稳定性</strong>——当你想玩的时候，别让寻找入口消耗了兴致。</p>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>炸金花和德州扑克有什么本质区别？</summary>
+                <div class="answer">
+                    核心差异在于手牌数量与公共牌。炸金花每人三张暗牌，无公共牌，比牌直接；德州扑克有两张底牌加五张公共牌，策略维度更宽。炸金花更强调短期判断与诈唬心理。
+                </div>
+            </details>
+            <details>
+                <summary>线上炸金花需要注册或登录吗？</summary>
+                <div class="answer">
+                    这取决于具体平台。建议选择那些无需强制注册、可直接进入桌面的页面，以减少等待时间。一个好的入口应该保持轻量。
+                </div>
+            </details>
+            <details>
+                <summary>如何判断一个入口是否「稳定」？</summary>
+                <div class="answer">
+                    稳定的入口意味着域名长期有效、页面加载快、无意外跳转或强制下载。它像一本常置书架上的书，随时可以取下翻阅。<a href="https://home-goldenflower.com">炸金花游戏</a>的页面即遵循这一原则。
+                </div>
+            </details>
+        </div>
+
+        <!-- 温和结尾 -->
+        <div class="gentle-footer">
+            <p>牌局有聚散，入口宜恒常。下次想起三张牌的对决时，愿你不费周折，直接开始。</p>
+            <p style="margin-top: 0.6rem; font-size: 0.9rem; color: #9a9288;">—— 基于真实牌桌习惯 · 故事叙述式介绍</p>
+        </div>
+
+    </main>
+
+</body>
+</html>
