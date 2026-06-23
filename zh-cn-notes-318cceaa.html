@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>炸金花游戏 · 经典规则与体验指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f3f5f8;
+            color: #1e2a3a;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .page {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* hero 区 — 低对比度、专业氛围 */
+        .hero {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 3rem 2.5rem 2.5rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e4e7ed;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            color: #0b1a2e;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #4b5a6e;
+            max-width: 70%;
+            margin-bottom: 1.8rem;
+            border-left: 4px solid #b0c4d9;
+            padding-left: 1.2rem;
+        }
+
+        .hero p {
+            color: #2b3f53;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero strong {
+            color: #0b1a2e;
+        }
+
+        /* 卡片网格 */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.8rem 1.8rem 2rem 1.8rem;
+            border: 1px solid #e0e5ed;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #14273e;
+            letter-spacing: -0.01em;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2b3f55;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0 0.4rem 1.3rem;
+            position: relative;
+            border-bottom: 1px solid #f0f2f6;
+        }
+
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .card ul li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #8aa1bb;
+            font-weight: 400;
+        }
+
+        /* 说明区 — 宽卡片 */
+        .explanatory {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e0e5ed;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .explanatory h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0f2139;
+        }
+
+        .explanatory p {
+            margin-bottom: 0.9rem;
+            color: #2b3f53;
+        }
+
+        .explanatory p:last-child {
+            margin-bottom: 0;
+        }
+
+        .explanatory a {
+            color: #1a4a7a;
+            text-decoration: none;
+            border-bottom: 1px solid #bcd0e2;
+            font-weight: 500;
+            transition: border-color 0.15s;
+        }
+
+        .explanatory a:hover {
+            border-bottom-color: #1a4a7a;
+        }
+
+        /* FAQ 摘要卡片 */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.8rem 2.5rem 2rem 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e0e5ed;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .faq-summary h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #14273e;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #eef2f8;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #0b1f35;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-a {
+            color: #3a4e65;
+            font-size: 0.93rem;
+        }
+
+        /* footer / 底部链接 */
+        .footer-links {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1.3rem 2rem;
+            border: 1px solid #e0e5ed;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #3a4e65;
+        }
+
+        .footer-links a {
+            color: #1a4a7a;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .footer-links a:hover {
+            border-bottom-color: #1a4a7a;
+        }
+
+        .footer-links .legal {
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero .sub {
+                max-width: 100%;
+                font-size: 1rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .explanatory {
+                padding: 1.5rem 1.5rem;
+            }
+
+            .faq-summary {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero 区 -->
+    <div class="hero">
+        <h1>炸金花游戏 · 牌型逻辑与竞技常识</h1>
+        <div class="sub">扑克比较类玩法中，以三张牌组合判定胜负的经典模式</div>
+        <p><strong>炸金花游戏</strong> 又称“赢三张”“拼三张”，在民间扑克竞技中流传广泛。其核心是每位参与者利用三张手牌，通过豹子、同花顺、金花、顺子、对子等固定牌型进行比大小。规则简明、节奏明快，对策略记忆和临场判断有一定要求。</p>
+        <p>作为一款以牌型等级为唯一标准的博弈型游戏，它不依赖复杂道具，只需一副标准扑克（不含大小王），适合2–6人对局。在许多线下休闲场景中，它常被用作破冰或短时娱乐的选择。</p>
+    </div>
+
+    <!-- 优势区 grid -->
+    <div class="grid-2">
+        <div class="card">
+            <h2>牌型层次与概率</h2>
+            <ul>
+                <li>豹子（AAA）概率约 0.24%，为最高牌型</li>
+                <li>同花顺出现概率 0.22%，仅次于豹子</li>
+                <li>金花（同花非顺）概率 5.0% 左右</li>
+                <li>顺子概率约 3.3%，对子概率约 16.9%</li>
+                <li>散牌（高牌）占比超过 74%，是多数对局的基础</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h2>常见决策场景</h2>
+            <ul>
+                <li>盲注与明注：前期信息少，下注尺度偏向保守</li>
+                <li>加注与跟注：依据手牌强度和位置调整</li>
+                <li>比牌时机：当牌力中等时，主动比牌可减少损失</li>
+                <li>诈唬（偷鸡）：利用牌桌形象制造压力</li>
+                <li>多人底池：牌型强度要求更高，避免边缘牌纠缠</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 说明区 包含链接嵌入 -->
+    <div class="explanatory">
+        <h2>规则简述与注意事项</h2>
+        <p>每一局开始时，参与者先投掷底注，随后发牌员每人派发三张暗牌。玩家查看手牌后，按顺时针依次决定“看牌”“加注”“跟注”或“弃牌”。当剩余两名玩家时，可选择“比牌”，由第三方亮牌判定胜负。牌型由高到低为：豹子 &gt; 同花顺 &gt; 金花 &gt; 顺子 &gt; 对子 &gt; 散牌。若牌型相同，则按点数比较（A最大，2最小）；若点数也相同，则为平局。</p>
+        <p>需要特别留意：不同地区对“235”特殊规则（散牌235可赢豹子）的接受度不同，开局前建议统一约定。另外，<a href="https://zh-cn-goldenflower.com">炸金花游戏</a>的线上版本通常还加入了自动比牌、快速桌等功能，适合希望节省洗牌时间或远程参与的玩家。但无论线上或线下，都应清晰界定每局筹码上限与回合时长。</p>
+        <p>从策略角度，新手可以优先记住牌型概率，避免高估同花或顺子的出现频率；同时注意控制每局的参与频率，避免因连续弃牌或盲目诈唬而失去节奏。</p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+        <h2>常见疑问 · 简答</h2>
+        <div class="faq-item">
+            <div class="faq-q">Q：豹子和同花顺哪个更大？</div>
+            <div class="faq-a">A：豹子（三张相同点数）大于同花顺。两者都是极低概率牌型，对局中遇到任意一种都应谨慎处理。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Q：散牌235真的能赢豹子吗？</div>
+            <div class="faq-a">A：仅为部分地区流行的变体规则，并非标准玩法。若采用此规则，需在开局前明确告知所有参与者。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Q：线上版本和线下规则完全一致吗？</div>
+            <div class="faq-a">A：核心牌型与比牌逻辑相同，但线上通常增加了计时、自动弃牌以及旁观功能。具体可参考对应平台的规则说明。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">Q：适合几人参与？</div>
+            <div class="faq-a">A：标准建议2–6人。超过6人时，牌局节奏变慢，且手牌强度分布更极端，运气成分相对上升。</div>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <span>了解更多：<a href="https://zh-cn-goldenflower.com">炸金花游戏</a></span>
+        <span class="legal">© 内容参考 · 理性娱乐</span>
+    </div>
+
+</div>
+</body>
+</html>
