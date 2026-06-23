@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>德州扑克app · 再访小记</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background: #fafaf9;
+    color: #30302e;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  /* 温和开场区 – 窄留白，弱装饰 */
+  .opening {
+    margin-bottom: 2.8rem;
+    text-align: left;
+  }
+  .opening p {
+    font-size: 1.1rem;
+    color: #4a4a48;
+    letter-spacing: 0.01em;
+    max-width: 85%;
+  }
+  .opening .short-line {
+    font-size: 1.5rem;
+    font-weight: 350;
+    color: #1e1e1c;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+  /* 承接段落 */
+  .bridge {
+    margin-bottom: 3.2rem;
+    padding-left: 0.25rem;
+    border-left: 2px solid #d9d6cf;
+    padding-left: 1.2rem;
+  }
+  .bridge p {
+    color: #3f3f3c;
+    font-size: 1rem;
+    margin-bottom: 0.85rem;
+  }
+  .bridge p:last-child {
+    margin-bottom: 0;
+  }
+  .bridge a {
+    color: #28634a;
+    text-decoration: none;
+    border-bottom: 1px solid #b0c9bb;
+    transition: border-color 0.2s;
+  }
+  .bridge a:hover {
+    border-bottom-color: #28634a;
+  }
+  /* 特点列表 — 温和卡片 */
+  .feature-section {
+    margin-bottom: 3.5rem;
+  }
+  .feature-section h2 {
+    font-size: 1.3rem;
+    font-weight: 450;
+    color: #2d2d2a;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .feature-list {
+    list-style: none;
+    padding: 0;
+  }
+  .feature-list li {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.15rem 1.3rem;
+    margin-bottom: 0.9rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02), 0 2px 8px rgba(0, 0, 0, 0.02);
+    border: 1px solid #eeedea;
+    transition: box-shadow 0.15s;
+  }
+  .feature-list li:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 6px 18px rgba(0, 0, 0, 0.03);
+  }
+  .feature-list li span {
+    display: inline-block;
+    font-weight: 460;
+    color: #28634a;
+    margin-right: 0.4rem;
+  }
+  .feature-list li {
+    color: #3b3b38;
+    font-size: 0.98rem;
+  }
+  /* 收藏与关注提示 */
+  .gentle-note {
+    background: #f3f2ef;
+    border-radius: 16px;
+    padding: 1.8rem 1.8rem 1.8rem 2rem;
+    margin-bottom: 3rem;
+  }
+  .gentle-note p {
+    font-size: 1rem;
+    color: #383836;
+    margin-bottom: 0.6rem;
+  }
+  .gentle-note p:last-child {
+    margin-bottom: 0;
+  }
+  .gentle-note .label {
+    display: inline-block;
+    background: #d5dfd4;
+    color: #1f3f31;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    padding: 0.15rem 0.7rem;
+    border-radius: 30px;
+    margin-bottom: 0.6rem;
+  }
+  /* FAQ 摘要 (极简) */
+  .faq-mini {
+    border-top: 1px solid #e3e1dc;
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+  }
+  .faq-mini h3 {
+    font-size: 1.1rem;
+    font-weight: 420;
+    color: #2b2b28;
+    margin-bottom: 1rem;
+  }
+  .faq-item {
+    margin-bottom: 1rem;
+  }
+  .faq-item .q {
+    font-weight: 470;
+    color: #1e3a2c;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+  .faq-item .a {
+    color: #4f4f4b;
+    font-size: 0.92rem;
+    padding-left: 0.4rem;
+  }
+  .faq-item .a a {
+    color: #28634a;
+    text-decoration: none;
+    border-bottom: 1px solid #cbd7cd;
+  }
+  .faq-item .a a:hover {
+    border-bottom-color: #28634a;
+  }
+  /* 温和结尾 */
+  .closing {
+    margin-top: 2.5rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid #eae7e1;
+    color: #4a4a46;
+    font-size: 0.95rem;
+  }
+  .closing p {
+    margin-bottom: 0.4rem;
+  }
+  .closing .small-meta {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #82817b;
+  }
+  @media (max-width: 480px) {
+    .container {
+      padding: 2rem 1.2rem 3rem;
+    }
+    .opening p {
+      max-width: 100%;
+    }
+    .opening .short-line {
+      font-size: 1.3rem;
+    }
+    .feature-list li {
+      padding: 1rem 1rem;
+    }
+    .gentle-note {
+      padding: 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 开场短句 -->
+  <div class="opening">
+    <div class="short-line">又回来了。</div>
+    <p>或者只是路过。书架上的扑克牌落了薄灰，指尖却还记得轻推筹码的触感。一些界面、一些节奏，一旦熟悉了，就很难忘掉。</p>
+  </div>
+
+  <!-- 承接段落：再次访问 & 收藏 -->
+  <div class="bridge">
+    <p>有些角落适合收藏。不是用书签，而是那种——偶尔会想起，然后点开看看的熟悉感。<a href="https://zh-dezhouapp.com">德州扑克app</a> 算不上喧闹，但每次打开，总能看到几位老面孔，牌桌旁也多了些新名字。它不催促你下注，也不刻意煽动情绪，倒像一间光线柔和的小俱乐部，牌局就在那里，等你坐下。</p>
+    <p>如果你也曾在这里停留过，大概知道那种节奏：翻牌前短暂思忖，河牌后释然一笑。收藏它，不是为了时时在线，而是知道它始终安静地待在收藏夹里，像一本翻到一半的小说，随时可以继续。</p>
+  </div>
+
+  <!-- 特点列表 -->
+  <div class="feature-section">
+    <h2>一些一直没变、也不必大变的事</h2>
+    <ul class="feature-list">
+      <li><span>·</span> 牌桌视觉干净克制，没有闪烁弹窗或夸张特效，注意力只放在公共牌和对手的下注节奏上。</li>
+      <li><span>·</span> 跟注、加注、弃牌的操作反馈轻快但不急躁，延迟感被压到很低，像是在和对面的人面对面推筹码。</li>
+      <li><span>·</span> 牌局记录简单可溯，回看自己的手牌时不会淹没在数据里，反而容易找到当时的决策逻辑。</li>
+      <li><span>·</span> 新手桌和常规桌之间的界限清晰，不至于误入盲注过高的牌局，也不至于总是面对机械型玩家。</li>
+      <li><span>·</span> 偶尔会遇到聊两句的对手——不全是表情包，也有关于底池赔率的简短交流，打完一局就散了，很轻。</li>
+    </ul>
+  </div>
+
+  <!-- 温和的关注/收藏提示 -->
+  <div class="gentle-note">
+    <span class="label">如果愿意</span>
+    <p>把 <a href="https://zh-dezhouapp.com">德州扑克app</a> 放到浏览器的书签栏，或者手机桌面，像放一盒不会发霉的筹码。它不常推送通知，也不强求日活，只是当你突然想打一手牌、或只想看看牌桌动态时，它就在那里。</p>
+    <p>偶尔关注一下它的更新日志也挺好——没有大开大合的改版，修复一些边缘情况，优化几处动画曲线，都是些小但舒服的调整。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <h3>几个你可能翻过的疑问</h3>
+    <div class="faq-item">
+      <div class="q">— 牌局匹配大概要多久？</div>
+      <div class="a">常规时段一般十几秒到半分钟，人少的时候会慢一点，但等待时可以在休息室调整筹码习惯。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">— 有练习模式吗？</div>
+      <div class="a">有的。不带压力的练习桌一直保留着，适合试新策略，或者只是随便打打，不记输赢。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">— 怎么看自己长期的手牌统计？</div>
+      <div class="a">个人页面里有一份简洁的图表，展示了入池率、胜率、摊牌质量等几个核心维度，不会冗长到让人头晕。</div>
+    </div>
+  </div>
+
+  <!-- 温和结尾 -->
+  <div class="closing">
+    <p>牌局会结束，但那些判断、犹豫、或是加注瞬间的直觉，会留在习惯里。偶尔回来，当作一种练习，也当作一种放松。</p>
+    <p>下次再路过时，记得书签栏里还有一扇安静的牌桌。</p>
+    <div class="small-meta">—— 以温和的方式，持续关注就好 · 2025</div>
+  </div>
+
+</div>
+</body>
+</html>
