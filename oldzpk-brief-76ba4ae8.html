@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>德州扑克在线 | 稳定入口与页面说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f7e8d6 0%, #f2d5b3 40%, #ebc9a0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            color: #3b2e24;
+        }
+
+        .page {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 白色卡片通用 */
+        .card {
+            background: #fefcf8;
+            border-radius: 32px;
+            box-shadow: 0 12px 28px rgba(120, 80, 50, 0.12), 0 0 0 1px rgba(200, 170, 140, 0.08);
+            padding: 2.5rem 2.8rem;
+            margin-bottom: 2.2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(120, 80, 50, 0.15);
+        }
+
+        /* hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 2.8rem 3.2rem;
+            background: linear-gradient(135deg, #fefcf8 0%, #faf3e9 100%);
+            border-radius: 40px;
+            box-shadow: 0 16px 40px rgba(100, 65, 35, 0.10);
+            margin-bottom: 2.2rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #7a5a3a, #b5835a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #5c4a36;
+            max-width: 680px;
+            margin: 0 auto 0.5rem;
+            font-weight: 380;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #7a654e;
+            margin-top: 0.3rem;
+        }
+
+        /* 按钮感链接 */
+        .btn-link {
+            display: inline-block;
+            background: #d9b382;
+            color: #2b1f16 !important;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.7rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(160, 110, 60, 0.15);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+            border: 1px solid #e7c7a6;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
+        }
+
+        .btn-link:hover {
+            background: #cda271;
+            box-shadow: 0 6px 14px rgba(140, 90, 45, 0.2);
+            transform: scale(1.02);
+            border-color: #c69a68;
+        }
+
+        .btn-link:active {
+            transform: scale(0.97);
+        }
+
+        /* 通用标题 */
+        .section-title {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #4d3826;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-left: 0.9rem;
+            border-left: 5px solid #dbb386;
+        }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: #654f38;
+            margin-bottom: 1.4rem;
+            font-weight: 380;
+        }
+
+        /* 特点网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.6rem;
+            margin: 1.2rem 0 0.2rem;
+        }
+
+        .feature-item {
+            background: #fcf7f0;
+            padding: 1.6rem 1.4rem;
+            border-radius: 24px;
+            border: 1px solid #efe4d5;
+            transition: background 0.2s;
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: #4f3927;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .feature-item h3::before {
+            content: "✦";
+            color: #b88758;
+            font-size: 1.1rem;
+        }
+
+        .feature-item p {
+            color: #5b4634;
+            font-size: 0.98rem;
+        }
+
+        /* 说明区 / 场景 */
+        .scenario-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 0.8rem 0;
+        }
+
+        .scenario-text {
+            flex: 2;
+            min-width: 240px;
+        }
+
+        .scenario-text p {
+            margin-bottom: 0.9rem;
+            color: #4a382a;
+        }
+
+        .scenario-note {
+            flex: 1.2;
+            background: #f7ede2;
+            padding: 1.5rem 1.8rem;
+            border-radius: 24px;
+            border: 1px solid #eadbc8;
+            min-width: 180px;
+        }
+
+        .scenario-note h4 {
+            font-weight: 500;
+            color: #4a3424;
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+        }
+
+        .scenario-note ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .scenario-note li {
+            padding: 0.3rem 0;
+            color: #5c4633;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .scenario-note li::before {
+            content: "•";
+            color: #b58253;
+            font-weight: bold;
+        }
+
+        /* FAQ摘要 */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-item {
+            background: #f9f2e9;
+            padding: 1.2rem 1.4rem;
+            border-radius: 20px;
+            border-left: 4px solid #dbb386;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-size: 1rem;
+            color: #3d2c1e;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-item p {
+            color: #5a4532;
+            font-size: 0.95rem;
+        }
+
+        /* 底部 */
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem 3rem;
+            padding: 1.8rem 0.5rem;
+            text-align: center;
+            border-top: 1px solid #dac9b6;
+            margin-top: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #5c4230;
+            text-decoration: none;
+            font-weight: 450;
+            border-bottom: 1px dashed #c7af95;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .footer-links a:hover {
+            color: #2f1f14;
+            border-bottom-style: solid;
+            border-color: #9b7a5b;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            color: #6f5943;
+            text-align: center;
+            padding-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .card {
+                padding: 1.6rem 1.2rem;
+                border-radius: 28px;
+            }
+
+            .hero {
+                padding: 2.8rem 1.2rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+                padding-left: 0.7rem;
+            }
+
+            .features-grid {
+                gap: 1rem;
+            }
+
+            .scenario-block {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-link {
+                font-size: 1rem;
+                padding: 0.6rem 1.6rem;
+            }
+
+            .footer-links {
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+
+        <!-- HERO -->
+        <div class="hero">
+            <h1>德州扑克在线 · 稳定入口</h1>
+            <p>一个让牌局更从容的起点——无论你身处何地，都能快速进入桌面，享受流畅的牌局体验。</p>
+            <div class="sub">页面说明 · 温和指引 · 清晰路径</div>
+            <div style="margin-top: 1.2rem;">
+                <a href="https://oldzpk.com" class="btn-link">德州扑克在线</a>
+            </div>
+        </div>
+
+        <!-- 优势区 -->
+        <div class="card">
+            <h2 class="section-title">为什么选择这个入口</h2>
+            <p class="section-sub">稳定的连接、清晰的界面、友好的等待区——每一局都从踏实开始。</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>持续可用</h3>
+                    <p>入口经过长期维护，响应速度快，减少中途掉线或卡顿的困扰。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>轻量页面</h3>
+                    <p>不加载冗余脚本，打开即用，专注牌桌本身而非杂乱信息。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>自然融入</h3>
+                    <p>界面设计温和不刺眼，色调与牌桌风格统一，适合长时间使用。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>说明清晰</h3>
+                    <p>每一步都有简短提示，新朋友也能很快找到方向，不必四处询问。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 说明区 + 场景提示 -->
+        <div class="card">
+            <h2 class="section-title">关于入口与页面说明</h2>
+            <div class="scenario-block">
+                <div class="scenario-text">
+                    <p>一个好的入口，不只是链接，更是一段安静的指引。当你打开 <a href="https://oldzpk.com" style="color:#7a5a3a; text-decoration: underline; text-underline-offset: 3px; font-weight: 500;">德州扑克在线</a> 时，看到的是整洁的牌桌与操作提示，没有弹窗干扰，也不会迷失在多层菜单里。</p>
+                    <p>页面围绕「稳定」和「可读」两个核心来组织：左侧展示牌局状态，右侧呈现玩家列表与行动按钮。所有关键信息都在一屏之内，不需要频繁滚动。对于习惯多桌的朋友，也提供了简洁的切换方式。</p>
+                    <p>我们建议初次使用时花一分钟熟悉界面布局——底池、位置、行动轮次都有明确标识。如果你喜欢边打牌边聊天，侧边的消息区也保持得十分低调。</p>
+                </div>
+                <div class="scenario-note">
+                    <h4>常见场景</h4>
+                    <ul>
+                        <li>快速开始一局，无需注册等待</li>
+                        <li>中途有事，可暂离托管</li>
+                        <li>查看历史牌局与统计</li>
+                        <li>调整界面亮度与牌桌主题</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="card">
+            <h2 class="section-title">FAQ 摘要</h2>
+            <p class="section-sub">一些你可能关心的小问题，这里提前做了整理。</p>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <strong>需要安装软件吗？</strong>
+                    <p>不需要。基于浏览器的页面，打开即可开始，也支持移动设备。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>牌局数据安全吗？</strong>
+                    <p>页面使用标准加密连接，牌局信息仅在你与服务器之间传输。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>可以自定义设置吗？</strong>
+                    <p>可以调整牌桌背景、文字大小和声音提醒，都在偏好面板里。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>同时开多桌会卡吗？</strong>
+                    <p>基于轻量渲染设计，多数设备可流畅运行 2-4 桌，视网络而定。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部链接 -->
+        <div class="footer-links">
+            <a href="https://oldzpk.com">德州扑克在线</a>
+            <a href="#">游戏说明</a>
+            <a href="#">常见问题</a>
+            <a href="#">界面指南</a>
+            <a href="#">联系支持</a>
+        </div>
+        <div class="footer-note">
+            一个安静的入口，让每一局都从容开始。
+        </div>
+
+    </div>
+</body>
+</html>
